@@ -27,12 +27,10 @@ Bottles_Solver::Bottles_Solver(int vol0, int vol1, int volume) {
         }
         ready_to_go = true;
     }
-    std::cout << large_bottle.max() << " " << small_bottle.max() << " " << volume << std::endl;
 }
 
 void Bottles_Solver::solve() {
     int step = 0;
-    std::cout << large_bottle.max() << " " << small_bottle.max() << " " << desired_volume << std::endl;
     while ((large_bottle.volume() != desired_volume && small_bottle.volume() != desired_volume) && step < 10 && ready_to_go)
     {
         switch (step % 4)
