@@ -10,8 +10,8 @@ all: get_volume
 
 default: get_volume
 
-get_volume: get_volume.o bottle.o bottles_solver.o
-	$(CC) -g -o get_volume get_volume.o bottle.o bottles_solver.o
+get_volume: get_volume.o bottle.o bottles_solver.o arg_check.o
+	$(CC) -g -o get_volume get_volume.o bottle.o bottles_solver.o arg_check.o
 
 get_volume.o:
 	$(CC) -g -c get_volume.cpp
@@ -21,6 +21,9 @@ bottle.o:
 
 bottle_solver.o:
 	$(CC) -g -c bottle_solver.cpp
+
+arg_check.o:
+	$(CC) -g -c arg_check.cpp
 
 clean:
 	rm *.o get_volume
