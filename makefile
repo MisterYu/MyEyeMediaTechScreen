@@ -6,6 +6,8 @@ CC = g++
 #  -Wall turns on most, but not all, compiler warnings
 CFLAGS  = -g -Wall
 
+all: get_volume
+
 default: get_volume
 
 get_volume: get_volume.o bottle.o bottles_solver.o
