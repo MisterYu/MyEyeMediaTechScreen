@@ -11,7 +11,6 @@ class Bottles_Solver {
         bool ready_to_go;
     public:
         Bottles_Solver(int, int, int);
-        Bottles_Solver(Bottle, Bottle, int);
         void solve();
 };
 
