@@ -12,7 +12,7 @@
 class arg_check {
 private:
     int value;
-    bool is_pos_int(std::string);
+    bool is_all_ints(std::string);
 public:
 	arg_check(char *);
     int get_value() { return value; }
