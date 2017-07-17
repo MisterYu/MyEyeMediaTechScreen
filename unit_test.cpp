@@ -7,7 +7,9 @@
 int main()
 {
     // unit tests for test_arg class
+    // define inputs
     std::vector<char*> arg_check_in = {"-1", "1.3", "0", "10"};
+    // define outputs
     std::vector<int> arg_check_out = {0, 0, 0, 10};
     std::cout << "arg_check unit test results:\n";
     for (int i = 0; i < arg_check_in.size(); ++i)
@@ -18,7 +20,9 @@ int main()
 
     // unit tests for bottle class
     // max test
+    // define inputs
     std::vector<int> bottle_max_in = {0, -1, 1};
+    // define outputs
     std::vector<int> bottle_max_out = {0, 0, 1};
     std::cout << "bottle init test results:\n";
     for (int i = 0; i < bottle_max_in.size(); ++i)
@@ -27,19 +31,24 @@ int main()
         std::printf("test %d: %s\n", i, pass_fail ? "pass" : "fail");
     }
     // add test
+    // define inputs
     std::vector<Bottle> bottle_add_in0 = {Bottle(1), Bottle(1), Bottle(1)};
     bottle_add_in0[2].fill();
     std::vector<Bottle> bottle_add_in1 = {Bottle(1), Bottle(2), Bottle(1)};
     for (int i = 0; i < bottle_add_in1.size(); ++i)
         bottle_add_in1[i].fill();
+    // define outputs
     std::vector<int> bottle_add_out0 = {1, 1, 1};
     std::vector<int> bottle_add_out1 = {0, 1, 1};
     std::cout << "bottle add test results:\n";
     for (int i = 0; i < bottle_add_in0.size(); ++i)
     {
+        // add one bottle into another and check if expected volumes match
         bool add_out0 = bottle_add_in0[i].add(bottle_add_in1[i]) == bottle_add_out1[i];
         bool add_out1 = bottle_add_in0[i].volume() == bottle_add_out0[i];
         bool pass_fail = add_out0 && add_out1;
         std::printf("test %d: %s\n", i, pass_fail ? "pass" : "fail");
     }
+
+    // TODO: add unit tests for bottles_solver
 }

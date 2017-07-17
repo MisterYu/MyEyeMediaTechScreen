@@ -1,16 +1,23 @@
 #include <iostream>
 #include "bottles_solver.h"
 
-
-Bottles_Solver::Bottles_Solver(int vol0, int vol1, int volume) {
-    std::cout << vol0 << " " << vol1 << " " << volume << std::endl;
-    desired_volume = volume;
+/*
+ * input:
+ * vol0 = one volume for a bottle
+ * vol1 = one volume for other bottle
+ * vol2 = desired volume to be derived from mixing 2 bottles
+ */
+Bottles_Solver::Bottles_Solver(int vol0, int vol1, int vol2) {
+    desired_volume = vol2;
     ready_to_go = false;
+    // check for bad initial conditions
     bool bottles_not_same = vol0 != vol1;
     bool both_bottles_even = vol0 % 2 == 0 && vol1 % 2 == 0;
-    bool desire_odd = volume % 2 == 1;
-    bool desire_less_than_bottles = volume < vol0 && volume < vol1;
+    bool desire_odd = vol2 % 2 == 1;
+    bool desire_less_than_bottles = vol2 < vol0 && vol2 < vol1;
     bool all_gt0 = vol0 > 0 && vol1 > 0 && desired_volume > 0;
+
+    // if initial conditions valid, set bottles volumes accordingly
     if (bottles_not_same
             && !(both_bottles_even && desire_odd)
             && desire_less_than_bottles
@@ -29,9 +36,19 @@ Bottles_Solver::Bottles_Solver(int vol0, int vol1, int volume) {
     }
 }
 
+/*
+ * go thru steps to desired volume in either bottle
+ * repeating steps
+ * 0 fill large bottle
+ * 1 pour large bottle into small bottle
+ * 2 dump small bottle
+ * 3 pour large bottle into small bottle
+ * go back to 0
+ * outputs steps of process to terminal
+ */
 void Bottles_Solver::solve() {
     int step = 0;
-    while ((large_bottle.volume() != desired_volume && small_bottle.volume() != desired_volume) && step < 10 && ready_to_go)
+    while ((large_bottle.volume() != desired_volume && small_bottle.volume() != desired_volume) && ready_to_go)
     {
         switch (step % 4)
         {
@@ -40,7 +57,7 @@ void Bottles_Solver::solve() {
                 break;
             case 1:
             case 3:
-                large_bottle.leftover(small_bottle.add(large_bottle));
+                large_bottle.set(small_bottle.add(large_bottle));
                 break;
             case 2:
                 small_bottle.dump();

@@ -12,7 +12,7 @@ class Bottle{
         int volume() { return current_volume; }
         void dump() { current_volume = 0; }
         void fill() { current_volume = max_volume; }
-        void leftover(int leftover) { current_volume = leftover; }
+        void set(int volume) { current_volume = volume; }
         int add(Bottle);
 };
 
